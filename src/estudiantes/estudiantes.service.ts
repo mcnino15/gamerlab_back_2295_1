@@ -11,16 +11,21 @@ export class EstudiantesService {
 
   async create(createIntegranteDto: CreateIntegranteDto): Promise<integrante> {
     try {
-      // Usa el cliente Prisma para crear un nuevo integrante
+      console.log("Intentando crear integrante en DB con datos:", createIntegranteDto); // Opcional: log
+
+      // Usa el cliente Prisma para crear un nuevo integrante en la tabla 'integrante'
       const nuevoIntegrante = await this.prisma.integrante.create({
-        data: createIntegranteDto,
+        data: createIntegranteDto, // Prisma toma los datos del DTO y los mapea a las columnas de la tabla
       });
-      return nuevoIntegrante;
+
+      console.log("Integrante creado exitosamente:", nuevoIntegrante); // Opcional: log
+      return nuevoIntegrante; // Devuelve el objeto integrante creado (con su ID asignado)
+
     } catch (error) {
-      // Manejo básico de errores (podría ser más específico)
-      console.error("Error al crear integrante:", error);
-      // Podrías verificar errores específicos de Prisma (ej: violación de clave única, clave foránea)
-      throw new InternalServerErrorException('No se pudo crear el integrante.');
+      console.error("Error al crear integrante en el servicio:", error);
+      // Aquí podrías añadir lógica más sofisticada para manejar errores específicos de Prisma (ej: P2002 para duplicados)
+      // Por ahora, lanza una excepción genérica de servidor interno
+      throw new InternalServerErrorException('No se pudo crear el integrante.', error.message);
     }
   }
 

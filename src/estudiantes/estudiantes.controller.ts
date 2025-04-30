@@ -9,7 +9,7 @@ export class EstudiantesController {
   // Inyecta el servicio para usar sus métodos
   constructor(private readonly estudiantesService: EstudiantesService) {}
 
-  @Post() // Endpoint para crear: POST /estudiantes
+  @Post('addnew') // Endpoint para crear: POST /estudiantes
   async create(@Body() createIntegranteDto: CreateIntegranteDto): Promise<integrante> {
     // El decorador @Body() extrae el cuerpo de la solicitud
     // y NestJS (con ValidationPipe) puede validarlo usando el DTO

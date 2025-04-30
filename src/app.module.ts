@@ -5,9 +5,10 @@ import { AppController } from './app.controller';
 // import { EstudiantesController } from './estudiantes/estudiantes.controller';
 import { PrismaService } from './prisma/prisma.service';
 import { EstudiantesModule } from './estudiantes/estudiantes.module'; // Importa el nuevo módulo
+import { EquiposModule } from './equipo/equipos.module';
 
 @Module({
-  imports: [EstudiantesModule], // Añade EstudiantesModule a los imports
+  imports: [EstudiantesModule, EquiposModule], // Añade EstudiantesModule a los imports
   controllers: [AppController], // Manten el AppController si lo usas para algo más
   providers: [], // PrismaService ahora se provee en EstudiantesModule, no es necesario aquí si solo se usa allí
                  // Si otros módulos necesitan PrismaService, déjalo aquí o crea un PrismaModule dedicado.
